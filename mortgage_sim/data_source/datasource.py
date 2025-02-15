@@ -1,13 +1,16 @@
 from __future__ import annotations
 from dataclasses import dataclass
 from pathlib import Path
+from typing import ClassVar
 
+from mortgage_sim.data_source.signatures import DataSourceSignature
 from mortgage_sim.utils.asserts import assert_type
 
 
 @dataclass(frozen=True)
 class DataSource:
     path: Path
+    signature: ClassVar[type[DataSourceSignature]] = DataSourceSignature
 
     @classmethod
     def create(cls, *, path: Path):
@@ -26,11 +29,16 @@ class DataSource:
     @classmethod
     def __init_datasource(cls, *, path: Path):
         # assert ends with datasource signature
+        cls.signature.assert_path_endswith_signature(path)
+
         path.mkdir()
 
     @classmethod
     def from_path(cls, *, path: Path):
         assert_type(path, Path)
+
+        cls.signature.assert_path_endswith_signature(path)
+
         if not path.is_dir():
             raise FileNotFoundError(
                 f"Datasource cannot be instantiated at path: {path}"
