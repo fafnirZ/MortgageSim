@@ -17,7 +17,7 @@ class RecurringPaymentsTableSchema(SchemaTemplate):
             "name": pl.String(),  # canonical id attached to a recurring event.
             "date": pl.Date(),
             "type": pl.Enum(["RECURRING_START", "RECURRING_END"]),
-            "amount": (pl.Float64(), None),
+            "amount": pl.Float64(),
         }
 
     @classmethod

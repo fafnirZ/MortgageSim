@@ -8,9 +8,9 @@ class EventsTableSchema(SchemaTemplate):
     def get_polars_schema(self) -> dict[str, pl.DataType]:
         return {
             "uuid": pl.String(),
-            "fk__recurring_payments": (pl.String(), None),
-            "fk__single_payments": (pl.String(), None),
-            "fk__loan_parameters": (pl.String(), None),
+            "fk__recurring_payments": pl.String(),
+            "fk__single_payments": pl.String(),
+            "fk__loan_parameters": pl.String(),
             # metadata
             "event_registered_timestamp": pl.Datetime(),
         }
