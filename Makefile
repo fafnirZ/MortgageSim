@@ -12,4 +12,4 @@ lint:
 
 
 test:
-	uv run pytest
+	uv run pytest -vvv
