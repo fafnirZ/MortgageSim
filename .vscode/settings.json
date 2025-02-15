@@ -13,4 +13,15 @@
         "."
     ],
     // "ruff.lint.run": "onSave",
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/Thumbs.db": true,
+        "**/.pytest_cache":true,
+        "**/__pycache__": true,
+        "**/*.egg-info": true,
+    }
 }
