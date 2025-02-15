@@ -4,7 +4,7 @@ from pathlib import Path
 from typing import ClassVar
 
 from mortgage_sim.data_source.signatures import DataSourceSignature
-from mortgage_sim.data_source.tables.events.events import EventsTable
+from mortgage_sim.data_source.tables.events.table import EventsTable
 from mortgage_sim.utils.asserts import assert_type
 
 
