@@ -6,9 +6,6 @@ from mortgage_sim.core.management.single_payment import SinglePaymentEventCreato
 from mortgage_sim.data_source.datasource import DataSource
 
 
-class EventCreationError(Exception): ...
-
-
 @dataclass(frozen=True)
 class EventManager(
     RecurringPaymentEventCreator,

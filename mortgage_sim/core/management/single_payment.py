@@ -1,6 +1,5 @@
 from __future__ import annotations
 from abc import abstractmethod
-from typing import Optional
 from datetime import date as Date_, datetime
 from uuid import uuid4
 
@@ -9,9 +8,7 @@ from mortgage_sim.data_source.tables.events.record import EventsTableRecord
 from mortgage_sim.data_source.tables.single_payments.record import (
     SinglePaymentsTableRecord,
 )
-
 from mortgage_sim.utils.asserts import assert_type
-import polars as pl
 
 
 class SinglePaymentEventCreator:

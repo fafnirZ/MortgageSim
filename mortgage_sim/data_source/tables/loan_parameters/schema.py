@@ -11,7 +11,6 @@ class LoanParametersTableSchema(SchemaTemplate):
             "principle_amount": pl.Float32(),
             "interest_rate": pl.Float32(),  # range(0,100) i.e. not a decimal
             "monthly_repayment": pl.Float32(),
-            "update_date": pl.Date(),
         }
 
     @classmethod
@@ -19,7 +18,6 @@ class LoanParametersTableSchema(SchemaTemplate):
         return {
             "uuid": str,
             "principle_amount": float,
-            "interest_rate": float,  # range(0,100) i.e. not a decimal
-            "monthly_repayment": float,
-            "update_date": date,
+            "interest_rate": (float, type(None)),  # range(0,100) i.e. not a decimal
+            "monthly_repayment": (float, type(None)),
         }
