@@ -14,7 +14,7 @@ class DataSource:
     signature: ClassVar[type[DataSourceSignature]] = DataSourceSignature
 
     @classmethod
-    def create(cls, *, path: Path):
+    def init(cls, *, path: Path):
         assert_type(path, Path)
         if path.exists():
             raise FileExistsError(
@@ -32,10 +32,11 @@ class DataSource:
         # assert ends with datasource signature
         cls.signature.assert_path_endswith_signature(path)
 
+        # create datasource
         path.mkdir()
 
-        events_table_path = path / EventsTable.signature.get_signature()
-        events_table_path.touch()
+        # create events table
+        EventsTable.create(path=path / EventsTable.signature.get_signature())
 
     @classmethod
     def from_path(cls, *, path: Path):

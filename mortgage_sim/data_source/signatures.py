@@ -26,8 +26,10 @@ class SignatureTemplate(ABC):
     def assert_path_endswith_signature(cls, path: Path):
         assert_type(path, Path)
         leaf = path.name
-        if not re.match(str(leaf), cls.get_regex_signature()):
-            raise SignatureError(f"path: {path} does not end with{cls.__name__}")
+        if not re.match(cls.get_regex_signature(), str(leaf)):
+            raise SignatureError(
+                f"path: {path} does not end with {cls.get_regex_signature()}"
+            )
 
 
 class DataSourceSignature(SignatureTemplate):

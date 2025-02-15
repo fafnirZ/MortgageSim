@@ -2,13 +2,12 @@ from abc import ABC, abstractmethod
 from pathlib import Path
 import polars as pl
 
-from mortgage_sim.data_source.tables.schema import SchemaTemplate
+from mortgage_sim.data_source.tables.templates.schema import SchemaTemplate
 
 
 class TableTemplate(ABC):
-    @property
     @abstractmethod
-    def path(self) -> Path:
+    def get_path(self) -> Path:
         raise NotImplementedError
 
     @property
@@ -17,4 +16,4 @@ class TableTemplate(ABC):
         raise NotImplementedError
 
     def scan_parquet(self) -> pl.LazyFrame:
-        return pl.scan_parquet(str(self.path))
+        return pl.scan_parquet(str(self.get_path()))
