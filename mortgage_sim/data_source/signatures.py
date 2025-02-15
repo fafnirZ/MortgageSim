@@ -62,3 +62,11 @@ class SinglePaymentsTableSignature(SignatureTemplate):
 
     def get_regex_signature():
         return r"single_payments\.parquet"
+
+
+class LoanParametersTableSignature(SignatureTemplate):
+    def get_signature():
+        return "loan_parameters.parquet"
+
+    def get_regex_signature():
+        return r"loan_parameters\.parquet"

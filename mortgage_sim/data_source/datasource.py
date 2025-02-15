@@ -5,6 +5,7 @@ from typing import ClassVar
 
 from mortgage_sim.data_source.signatures import DataSourceSignature
 from mortgage_sim.data_source.tables.events.table import EventsTable
+from mortgage_sim.data_source.tables.loan_parameters.table import LoanParametersTable
 from mortgage_sim.data_source.tables.recurring_payments.table import (
     RecurringPaymentsTable,
 )
@@ -45,6 +46,7 @@ class DataSource:
             EventsTable,
             RecurringPaymentsTable,
             SinglePaymentsTable,
+            LoanParametersTable,
         ]
 
         for table_class in all_tables:
@@ -85,4 +87,10 @@ class DataSource:
     def single_payments_table(self):
         return SinglePaymentsTable(
             path=self.path / SinglePaymentsTable.get_signature().get_signature()
+        )
+
+    @property
+    def loan_parameters_table(self):
+        return LoanParametersTable(
+            path=self.path / LoanParametersTable.get_signature().get_signature()
         )
