@@ -6,7 +6,8 @@ from mortgage_sim.data_source.signatures import DataSourceSignature
 
 
 def test_add_recurring_record_single(tmp_path):
-    p = Path.cwd() / DataSourceSignature.get_signature()
+    # p = Path.cwd() / DataSourceSignature.get_signature()
+    p = tmp_path / DataSourceSignature.get_signature()
     ds = DataSource.init(path=p)
 
     em = EventManager(data_source=ds)

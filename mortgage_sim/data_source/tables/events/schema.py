@@ -19,9 +19,9 @@ class EventsTableSchema(SchemaTemplate):
     def get_python_schema(self) -> dict[str, pl.DataType]:
         return {
             "uuid": str,
-            "fk__recurring_payments": (str, None),
-            "fk__single_payments": (str, None),
-            "fk__loan_parameters": (str, None),
+            "fk__recurring_payments": (str, type(None)),
+            "fk__single_payments": (str, type(None)),
+            "fk__loan_parameters": (str, type(None)),
             # metadata
             "event_registered_timestamp": datetime,
         }

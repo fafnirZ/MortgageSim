@@ -27,5 +27,5 @@ class RecurringPaymentsTableSchema(SchemaTemplate):
             "name": str,  # canonical id attached to a recurring event.
             "date": date,
             "type": RecurringPaymentsType,
-            "amount": (float, None),
+            "amount": (float, type(None)),
         }

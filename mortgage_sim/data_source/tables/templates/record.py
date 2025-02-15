@@ -13,8 +13,15 @@ class RecordTemplate(ABC):
         raise NotImplementedError
 
     def __init__(self, *args, **kwargs):
+        #
+        # disallow args
+        #
         if len(args) > 0:
             raise ValueError("No argument initialisation allowed.")
+
+        #
+        # asserts no less or more attributes declared
+        #
         if kwargs.keys() - self.get_schema().get_polars_schema().keys() != set():
             raise ValueError(
                 "Invalid Kwargs\n"
@@ -22,11 +29,19 @@ class RecordTemplate(ABC):
                 f"Got: {kwargs.keys()}\n"
             )
 
-    def __post_init__(self):
+        #
+        # asserts types are according to schema
+        #
         for expected_attrs, expected_py_type in (
             self.get_schema().get_python_schema().items()
         ):
             assert_type(expected_attrs, expected_py_type)
+
+        # dynamically setting values
+        # based on kwargs which has been
+        # validated against schema.
+        for attr, attr_val in kwargs.items():
+            setattr(self, attr, attr_val)
 
     # def to_csv(self, append_newline: bool = True) -> str:
     #     _str = ""

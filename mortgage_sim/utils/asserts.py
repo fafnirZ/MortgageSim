@@ -11,11 +11,13 @@ def assert_type(input: any, expected_types: type | tuple[type, ...]) -> None:
         for val in expected_types:
             if not isinstance(val, type):
                 raise ValueError(
-                    f"expected Types in the provided tupleinstead got: {expected_types}"
+                    f"expected Types in the provided tuple\ninstead got: {expected_types}\n"
+                    "make sure you actually provided types in the assert_type fn call."
                 )
 
     if not isinstance(input, expected_types):
         raise TypeError(
-            f"Type Assertion failed:Expected: {expected_types}\n",
-            "Instead got: {type(input)}",
+            "Type Assertion failed:\n",
+            f"Expected: {expected_types}\n",
+            f"Instead got: {type(input)}",
         )

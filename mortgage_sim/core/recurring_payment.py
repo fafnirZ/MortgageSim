@@ -1,7 +1,7 @@
 from __future__ import annotations
 from abc import abstractmethod
 from typing import Optional
-from datetime import date as Date_
+from datetime import date as Date_, datetime
 from uuid import uuid4
 
 from mortgage_sim.data_source.datasource import DataSource
@@ -85,6 +85,7 @@ class RecurringPaymentEventCreator:
             fk__recurring_payments=recurring_payment_uuid,
             fk__single_payments=None,
             fk__loan_parameters=None,
+            event_registered_timestamp=datetime.now(),
         )
 
         if __event_type == RecurringPaymentsType.RECURRING_START:
