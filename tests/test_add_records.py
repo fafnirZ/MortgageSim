@@ -1,5 +1,7 @@
 from datetime import date
 from pathlib import Path
+
+import pytest
 from mortgage_sim.core.management.management import EventManager
 from mortgage_sim.data_source.datasource import DataSource
 from mortgage_sim.data_source.signatures import DataSourceSignature
@@ -51,6 +53,9 @@ def test_add_recurring_record_multiple_records(tmp_path):
     ]
 
 
+#
+# single records
+#
 def test_add_single_record_multiple_of_them(tmp_path):
     # p = Path.cwd() / DataSourceSignature.get_signature()
     p = tmp_path / DataSourceSignature.get_signature()
@@ -71,3 +76,45 @@ def test_add_single_record_multiple_of_them(tmp_path):
     assert len(events_df) == 3
     recurring_df = ds.single_payments_table.scan_csv().collect()
     assert len(recurring_df) == 3
+
+
+#
+# loan parameters
+#
+
+
+# fmt: off
+@pytest.mark.parametrize(
+    "records",
+    [
+        [
+            {"principle_amount": 300000.0, "interest_rate": 6.8, "monthly_repayment": 2600.0},
+        ],
+        [
+            {"principle_amount": 300000.0, "interest_rate": 6.8, "monthly_repayment": 2600.0},
+            {"principle_amount": None, "interest_rate": 6.0, "monthly_repayment": 2300.0},
+            {"principle_amount": None, "interest_rate": 5.3, "monthly_repayment": 2000.0},
+        ],
+        pytest.param([
+            {"principle_amount": 300000.0, "interest_rate": 6.8, "monthly_repayment": 2600.0},
+            {"principle_amount": 300000.0, "interest_rate": 6.0, "monthly_repayment": 2300.0},
+            {"principle_amount": 300000.0, "interest_rate": 5.3, "monthly_repayment": 2000.0},
+        ], marks=pytest.mark.xfail), # expected to fail
+    ]
+)
+def test_add_loan_parameter_records(tmp_path, records):
+    # p = Path.cwd() / DataSourceSignature.get_signature()
+    p = tmp_path / DataSourceSignature.get_signature()
+    ds = DataSource.init(path=p)
+
+    em = EventManager(data_source=ds)
+
+
+    for record in records:
+        em.new_loan_parameter(**record)
+
+    events_df = ds.events_table.scan_csv().collect()
+    assert len(events_df) == len(records)
+    loan_params_df = ds.loan_parameters_table.scan_csv().collect()
+    assert len(loan_params_df) == len(records)
+# fmt: on

@@ -26,7 +26,7 @@ class LoanParameterEventCreator:
                 "Principle amount has been changed...",
             )
 
-        return existing_principle_amount[0]
+        return next(iter(existing_principle_amount))
 
     def new_loan_parameter(
         self,
