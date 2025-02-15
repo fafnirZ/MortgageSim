@@ -1,7 +1,6 @@
 from __future__ import annotations
 from dataclasses import dataclass
 from pathlib import Path
-from typing import ClassVar
 from mortgage_sim.data_source.signatures import RecurringPaymentsTableSignature
 from mortgage_sim.data_source.tables.recurring_payments.schema import (
     RecurringPaymentsTableSchema,

@@ -14,7 +14,7 @@ def test_add_recurring_record_single(tmp_path):
     em.new_recurring_payment_event(
         name="monthly_payments",
         date=date(2024, 1, 1),
-        amount=1000,
+        amount=1000.0,
     )
 
     events_df = ds.events_table.scan_csv().collect()
