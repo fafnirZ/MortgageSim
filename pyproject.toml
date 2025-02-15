@@ -1,0 +1,68 @@
+[project]
+name = "mortgage_sim"
+version = "0.1.0"
+description = "Add your description here"
+requires-python = ">=3.10"
+dependencies = [
+    "polars>=1.22.0",
+]
+
+[build-system]
+requires = ["hatchling>=1.1.0"]  # Minimum hatchling version
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["mortgage_sim"]
+
+[project.optional-dependencies]
+dev = [
+  "pytest",
+  "pytest-cov",
+  "pytest-mock",
+  "pytest-env",
+  "pytest-xdist",
+  "ruff"
+]
+
+
+
+[tools.ruff]
+line-length = 100
+indent-width = 4
+
+[tools.ruff.lint]
+preview = true
+ignore = [
+  "E731", # no lambda
+]
+
+target-version = "py310"
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+docstring-code-format = true
+docstring-code-line-length = 30
+
+# respect magic trailing commas
+skip-magic-trailing-comma = false
+
+# auto detect appropriate line ending
+line-ending = "auto"
+
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+
+[tools.pytest.ini_options]
+testpaths = ["tests"]
+filterwarnings = [
+]
+addopts = [
+  "-vv"
+]
+env = [
+
+]
