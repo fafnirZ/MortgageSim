@@ -1,0 +1,16 @@
+{
+
+    "[python]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "charliermarsh.ruff"
+    },
+    "python.defaultInterpreterPath": ".venv/bin/python3", // Or let VS Code auto-detect if venv is in workspace
+    "python.venvPath": ".venv", // Corrected path - venv should be in project
+    "python.languageServer": "Pylance",
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true,
+    "python.testing.pytestArgs": [
+        "."
+    ],
+    // "ruff.lint.run": "onSave",
+}
