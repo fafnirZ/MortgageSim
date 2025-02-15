@@ -42,31 +42,31 @@ class DataSourceSignature(SignatureTemplate):
 
 class EventsTableSignature(SignatureTemplate):
     def get_signature():
-        return "events.parquet"
+        return "events.csv"
 
     def get_regex_signature():
-        return r"events\.parquet"
+        return r"events\.csv"
 
 
 class RecurringPaymentsTableSignature(SignatureTemplate):
     def get_signature():
-        return "recurring_payments.parquet"
+        return "recurring_payments.csv"
 
     def get_regex_signature():
-        return r"recurring_payments\.parquet"
+        return r"recurring_payments\.csv"
 
 
 class SinglePaymentsTableSignature(SignatureTemplate):
     def get_signature():
-        return "single_payments.parquet"
+        return "single_payments.csv"
 
     def get_regex_signature():
-        return r"single_payments\.parquet"
+        return r"single_payments\.csv"
 
 
 class LoanParametersTableSignature(SignatureTemplate):
     def get_signature():
-        return "loan_parameters.parquet"
+        return "loan_parameters.csv"
 
     def get_regex_signature():
-        return r"loan_parameters\.parquet"
+        return r"loan_parameters\.csv"

@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 from typing import Optional
 
 from mortgage_sim.core.recurring_payment import RecurringPaymentEventCreator
@@ -13,6 +14,7 @@ from mortgage_sim.utils.asserts import assert_type
 class EventCreationError(Exception): ...
 
 
+@dataclass(frozen=True)
 class EventManager(
     RecurringPaymentEventCreator,
 ):

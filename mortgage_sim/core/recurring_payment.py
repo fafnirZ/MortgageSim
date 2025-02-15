@@ -33,16 +33,16 @@ class RecurringPaymentEventCreator:
                 RECURRING_START
         """
         records_with_same_canonical_name = df.filter("name" == name)
-        latest_record_with_same_canonical_name = (
-            df
-            .sort("date", descending=True)
-            .row(0)
-        )  # fmt: off
         # check if recurring payment of same
         # name already exists
         # based on that itll dictate next logic
         __event_type = None
         if len(records_with_same_canonical_name) > 1:
+            latest_record_with_same_canonical_name = (
+                df
+                .sort("date", descending=True)
+                .row(0)
+            )  # fmt: off
             if (
                 latest_record_with_same_canonical_name["type"]
                 == RecurringPaymentsType.RECURRING_START.value
@@ -67,7 +67,7 @@ class RecurringPaymentEventCreator:
         assert_type(name, str)
         df = (
                 self
-                .data_source
+                .get_datasource()
                 .recurring_payments_table
                 .scan_csv()
                 .collect()

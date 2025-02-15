@@ -81,7 +81,7 @@ class TableTemplate(ABC):
             {},
             schema=cls.get_schema().get_polars_schema(),
         )
-        df.write_parquet(path)
+        df.write_csv(path)
 
     def append_record(self, *, record: RecordTemplate):
         if record.get_schema() != self.get_schema():
