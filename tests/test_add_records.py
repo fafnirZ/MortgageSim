@@ -1,6 +1,6 @@
 from datetime import date
 from pathlib import Path
-from mortgage_sim.core.management import EventManager
+from mortgage_sim.core.management.management import EventManager
 from mortgage_sim.data_source.datasource import DataSource
 from mortgage_sim.data_source.signatures import DataSourceSignature
 
