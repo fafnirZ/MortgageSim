@@ -29,3 +29,7 @@ class SinglePaymentsTable(TableTemplate):
     @classmethod
     def get_schema(cls) -> type[SinglePaymentsTableSchema]:
         return SinglePaymentsTableSchema
+
+    @classmethod
+    def get_joins(cls) -> dict[str, str]:
+        return {}

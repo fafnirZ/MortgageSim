@@ -30,3 +30,11 @@ class EventsTable(TableTemplate):
     @classmethod
     def get_signature(cls) -> type[EventsTableSignature]:
         return EventsTableSignature
+
+    @classmethod
+    def get_joins(cls) -> dict[str, str]:
+        return {
+            "self.fk__recurring_payments": "RecurringPaymentsTable.uuid",
+            "self.fk__single_payments": "SinglePaymentsTable.uuid",
+            "self.fk__loan_parameters": "LoanParamatersTable.uuid",
+        }

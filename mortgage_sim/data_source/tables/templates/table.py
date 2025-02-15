@@ -45,6 +45,11 @@ class TableTemplate(ABC):
     def get_signature(cls) -> type[SignatureTemplate]:
         raise NotImplementedError
 
+    @classmethod
+    @abstractmethod
+    def get_joins(cls) -> dict[str, str]:
+        raise NotImplementedError
+
     #
     # concrete methods
     #

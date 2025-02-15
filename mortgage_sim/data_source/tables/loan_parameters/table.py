@@ -34,3 +34,7 @@ class LoanParametersTable(TableTemplate):
     @classmethod
     def get_signature(cls) -> type[LoanParametersTableSignature]:
         return LoanParametersTableSignature
+
+    @classmethod
+    def get_joins(cls) -> dict[str, str]:
+        return {}

@@ -30,3 +30,7 @@ class RecurringPaymentsTable(TableTemplate):
     @classmethod
     def get_schema(cls) -> type[RecurringPaymentsTableSchema]:
         return RecurringPaymentsTableSchema
+
+    @classmethod
+    def get_joins(cls) -> dict[str, str]:
+        return {}
