@@ -7,12 +7,12 @@ dependencies = [
     "polars>=1.22.0",
 ]
 
-[build-system]
-requires = ["hatchling>=1.1.0"]  # Minimum hatchling version
-build-backend = "hatchling.build"
-
-[tool.hatch.build.targets.wheel]
-packages = ["mortgage_sim"]
+# [build-system]
+# requires = ["hatchling>=1.1.0"]  # Minimum hatchling version
+# build-backend = "hatchling.build"
+# 
+# [tool.hatch.build.targets.wheel]
+# packages = ["mortgage_sim/"]
 
 [project.optional-dependencies]
 dev = [
@@ -24,6 +24,8 @@ dev = [
   "ruff"
 ]
 
+[tool.uv.sources]
+mortgage_sim = {path = "./mortgage_sim", editable = true}
 
 
 [tools.ruff]
