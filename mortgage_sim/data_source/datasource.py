@@ -9,7 +9,7 @@ from mortgage_sim.data_source.tables.loan_parameters.table import LoanParameters
 from mortgage_sim.data_source.tables.recurring_payments.table import (
     RecurringPaymentsTable,
 )
-from mortgage_sim.data_source.tables.single_payment.table import SinglePaymentsTable
+from mortgage_sim.data_source.tables.single_payments.table import SinglePaymentsTable
 from mortgage_sim.data_source.tables.templates.table import TableTemplate
 from mortgage_sim.utils.asserts import assert_type
 

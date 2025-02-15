@@ -2,7 +2,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from pathlib import Path
 from mortgage_sim.data_source.signatures import SinglePaymentsTableSignature
-from mortgage_sim.data_source.tables.single_payment.schema import (
+from mortgage_sim.data_source.tables.single_payments.schema import (
     SinglePaymentsTableSchema,
 )
 from mortgage_sim.data_source.tables.templates.table import TableTemplate
