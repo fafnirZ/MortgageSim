@@ -4,6 +4,7 @@ from pathlib import Path
 import polars as pl
 
 from mortgage_sim.data_source.signatures import SignatureTemplate
+from mortgage_sim.data_source.tables.templates.record import RecordTemplate
 from mortgage_sim.data_source.tables.templates.schema import SchemaTemplate
 from mortgage_sim.utils.asserts import assert_type
 
@@ -81,3 +82,15 @@ class TableTemplate(ABC):
             schema=cls.get_schema().get_polars_schema(),
         )
         df.write_parquet(path)
+
+    def append_record(self, *, record: RecordTemplate):
+        if record.get_schema() != self.get_schema():
+            raise AssertionError(
+                "Cannot append a record if schema does not match table\n"
+                f"Table: {self.get_schema()}\n"
+                f"Record: {record.get_schema()}\n"
+            )
+
+        # NOTE this only works for CSV datafiles
+        with self.get_path().open("a") as f:
+            f.append(record.to_csv())
