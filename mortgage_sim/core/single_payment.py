@@ -47,3 +47,15 @@ class SinglePaymentEventCreator:
             date=date,
             amount=amount,
         )
+
+        # append to events table
+        (self
+            .get_datasource()
+            .events_table
+            .append_record(record=events_record))  # fmt: off
+
+        # append to single table
+        (self
+            .get_datasource()
+            .single_payments_table
+            .append_record(record=singlep_record))  # fmt: off
