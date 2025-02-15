@@ -5,6 +5,7 @@ import pytest
 from mortgage_sim.core.management.management import EventManager
 from mortgage_sim.data_source.datasource import DataSource
 from mortgage_sim.data_source.signatures import DataSourceSignature
+from mortgage_sim.data_source.tables.recurring_payments.schema import FrequencyType
 
 
 def test_add_recurring_record_single(tmp_path):
@@ -17,6 +18,7 @@ def test_add_recurring_record_single(tmp_path):
         name="monthly_payments",
         date=date(2024, 1, 1),
         amount=1000.0,
+        frequency=FrequencyType.MONTHLY,
     )
 
     events_df = ds.events_table.scan_csv().collect()
@@ -33,9 +35,24 @@ def test_add_recurring_record_multiple_records(tmp_path):
     em = EventManager(data_source=ds)
 
     records = [
-        {"name": "monthly_payments", "date": date(2024, 1, 1), "amount": 1000.0},
-        {"name": "monthly_payments", "date": date(2024, 2, 1), "amount": 1000.0},
-        {"name": "monthly_payments", "date": date(2024, 3, 1), "amount": 1000.0},
+        {
+            "name": "monthly_payments",
+            "date": date(2024, 1, 1),
+            "amount": 1000.0,
+            "frequency": FrequencyType.MONTHLY,
+        },
+        {
+            "name": "monthly_payments",
+            "date": date(2024, 2, 1),
+            "amount": 1000.0,
+            "frequency": FrequencyType.MONTHLY,
+        },
+        {
+            "name": "monthly_payments",
+            "date": date(2024, 3, 1),
+            "amount": 1000.0,
+            "frequency": FrequencyType.MONTHLY,
+        },
     ]
 
     for record in records:

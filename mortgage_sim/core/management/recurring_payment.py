@@ -10,6 +10,7 @@ from mortgage_sim.data_source.tables.recurring_payments.record import (
     RecurringPaymentsTableRecord,
 )
 from mortgage_sim.data_source.tables.recurring_payments.schema import (
+    FrequencyType,
     RecurringPaymentsType,
 )
 from mortgage_sim.utils.asserts import assert_type
@@ -63,6 +64,7 @@ class RecurringPaymentEventCreator:
         name: str,
         date: Optional[Date_],
         amount: Optional[float],
+        frequency: Optional[FrequencyType],
     ):
         assert_type(name, str)
         df = (
@@ -92,6 +94,7 @@ class RecurringPaymentEventCreator:
         if __event_type == RecurringPaymentsType.RECURRING_START:
             assert_type(date, Date_)
             assert_type(amount, (int, float))
+            assert_type(frequency, FrequencyType)
 
         elif __event_type == RecurringPaymentsType.RECURRING_END:
             pass
@@ -102,6 +105,7 @@ class RecurringPaymentEventCreator:
             date=date,
             type=__event_type,
             amount=amount,
+            frequency=frequency,
         )
 
         # append to events table

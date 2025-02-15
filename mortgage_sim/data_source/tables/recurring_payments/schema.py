@@ -9,6 +9,13 @@ class RecurringPaymentsType(PYEnum):
     RECURRING_END = "RECURRING_END"
 
 
+class FrequencyType(PYEnum):
+    WEEKLY = "WEEKLY"
+    FORTNIGHTLY = "FORTNIGHTLY"
+    MONTHLY = "MONTHLY"
+    YEARLY = "YEARLY"
+
+
 class RecurringPaymentsTableSchema(SchemaTemplate):
     @classmethod
     def get_polars_schema(self) -> dict[str, pl.DataType]:
@@ -18,6 +25,14 @@ class RecurringPaymentsTableSchema(SchemaTemplate):
             "date": pl.Date(),
             "type": pl.Enum(["RECURRING_START", "RECURRING_END"]),
             "amount": pl.Float64(),
+            "frequency": pl.Enum(
+                [
+                    "WEEKLY",
+                    "FORTNIGHTLY",
+                    "MONTHLY",
+                    "YEARLY",
+                ]
+            ),
         }
 
     @classmethod
@@ -28,4 +43,5 @@ class RecurringPaymentsTableSchema(SchemaTemplate):
             "date": date,
             "type": RecurringPaymentsType,
             "amount": (float, type(None)),
+            "frequency": (FrequencyType, type(None)),
         }
