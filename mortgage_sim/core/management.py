@@ -2,6 +2,7 @@ from dataclasses import dataclass
 from typing import Optional
 
 from mortgage_sim.core.recurring_payment import RecurringPaymentEventCreator
+from mortgage_sim.core.single_payment import SinglePaymentEventCreator
 from mortgage_sim.data_source.datasource import DataSource
 from mortgage_sim.data_source.tables.recurring_payments.schema import (
     RecurringPaymentsType,
@@ -17,6 +18,7 @@ class EventCreationError(Exception): ...
 @dataclass(frozen=True)
 class EventManager(
     RecurringPaymentEventCreator,
+    SinglePaymentEventCreator,
 ):
     data_source: DataSource
 
@@ -34,9 +36,4 @@ class EventManager(
         # principle NO
         # interest_rate yes
         # monthly_repayments yes
-        pass
-
-    def new_single_payment_event(
-        self,
-    ):
         pass

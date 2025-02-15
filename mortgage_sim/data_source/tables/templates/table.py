@@ -84,6 +84,8 @@ class TableTemplate(ABC):
         df.write_csv(path)
 
     def append_record(self, *, record: RecordTemplate):
+        assert_type(record, RecordTemplate)
+
         if record.get_schema() != self.get_schema():
             raise AssertionError(
                 "Cannot append a record if schema does not match table\n"
@@ -91,6 +93,15 @@ class TableTemplate(ABC):
                 f"Record: {record.get_schema()}\n"
             )
 
+        # NOTE: unclear whether the ordering
+        # if we change ordering of schema keys
+        # itll cause problems in this
+        # TODO: do some discovery.
+
         # NOTE this only works for CSV datafiles
         with self.get_path().open("a") as f:
-            f.append(record.to_csv())
+            (
+                record
+                .to_df()
+                .write_csv(f, include_header=False)
+            )  # fmt: off

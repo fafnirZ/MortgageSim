@@ -103,32 +103,15 @@ class RecurringPaymentEventCreator:
             type=__event_type,
             amount=amount,
         )
-        ####################################
-        # TODO assert schemas are the same.
-        ####################################
 
         # append to events table
-        # TODO make the tables themself handle the appending logic
-        # so they can perform more exhaustive schema validation.
-
-        existing_events_table = self.get_datasource().events_table
-        with existing_events_table.path.open("a") as events_f:
-            (
-                events_record
-                .to_df()
-                .write_csv(events_f, include_header=False)
-            )  # fmt: off
+        (self
+            .get_datasource()
+            .events_table
+            .append_record(record=events_record))  # fmt: off
 
         # append to recurring table
-        existing_recurring_payment_event = (
-            self
+        (self
             .get_datasource()
             .recurring_payments_table
-        )  # fmt: off
-
-        with existing_recurring_payment_event.path.open("a") as recurring_f:
-            (
-                recurring_record
-                .to_df()
-                .write_csv(recurring_f, include_header=False)
-            )  # fmt: off
+            .append_record(record=recurring_record))  # fmt: off
