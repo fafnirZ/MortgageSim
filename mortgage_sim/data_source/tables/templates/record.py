@@ -51,12 +51,3 @@ class RecordTemplate(ABC):
         }
 
         return pl.DataFrame(_d, schema=self.get_schema().get_polars_schema())
-
-    # def to_csv(self, append_newline: bool = True) -> str:
-    #     _str = ""
-    #     for col_name in self.get_schema():
-    #         _str += getattr(self, col_name)
-    #         _str += ","
-    #     if append_newline:
-    #         _str += "\n"
-    #     return _str
