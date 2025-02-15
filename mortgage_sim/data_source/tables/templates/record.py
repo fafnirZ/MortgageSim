@@ -12,6 +12,16 @@ class RecordTemplate(ABC):
     def get_schema(cls) -> type[SchemaTemplate]:
         raise NotImplementedError
 
+    def __init__(self, *args, **kwargs):
+        if len(args) > 0:
+            raise ValueError("No argument initialisation allowed.")
+        if kwargs.keys() - self.get_schema().get_polars_schema().keys() != set():
+            raise ValueError(
+                "Invalid Kwargs\n"
+                f"Expected: {self.get_schema().get_polars_schema().keys()}\n"
+                f"Got: {kwargs.keys()}\n"
+            )
+
     def __post_init__(self):
         for expected_attrs, expected_py_type in (
             self.get_schema().get_python_schema().items()
