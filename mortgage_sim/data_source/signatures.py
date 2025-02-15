@@ -36,3 +36,11 @@ class DataSourceSignature(SignatureTemplate):
 
     def get_regex_signature():
         return r"datasource"
+
+
+class EventsTableSignature(SignatureTemplate):
+    def get_signature():
+        return "events.parquet"
+
+    def get_regex_signature():
+        return r"events\.parquet"

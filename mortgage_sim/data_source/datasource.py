@@ -4,6 +4,7 @@ from pathlib import Path
 from typing import ClassVar
 
 from mortgage_sim.data_source.signatures import DataSourceSignature
+from mortgage_sim.data_source.tables.events.events import EventsTable
 from mortgage_sim.utils.asserts import assert_type
 
 
@@ -33,6 +34,9 @@ class DataSource:
 
         path.mkdir()
 
+        events_table_path = path / EventsTable.signature.get_signature()
+        events_table_path.touch()
+
     @classmethod
     def from_path(cls, *, path: Path):
         assert_type(path, Path)
@@ -45,3 +49,11 @@ class DataSource:
                 "It either does not exist or is not a directory"
             )
         return cls(path=path)
+
+    #
+    # instance methods
+    #
+
+    @property
+    def events_table(self):
+        return EventsTable(path=self.path / EventsTable.signature.get_signature())
