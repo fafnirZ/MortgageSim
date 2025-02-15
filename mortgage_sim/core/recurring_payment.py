@@ -32,16 +32,16 @@ class RecurringPaymentEventCreator:
             if the latest record with the same "name" == "END"
                 RECURRING_START
         """
-        records_with_same_canonical_name = df.filter("name" == name)
+        records_with_same_canonical_name = df.filter(pl.col("name") == name)
         # check if recurring payment of same
         # name already exists
         # based on that itll dictate next logic
         __event_type = None
-        if len(records_with_same_canonical_name) > 1:
+        if len(records_with_same_canonical_name) > 0:
             latest_record_with_same_canonical_name = (
                 df
                 .sort("date", descending=True)
-                .row(0)
+                .row(0, named=True)
             )  # fmt: off
             if (
                 latest_record_with_same_canonical_name["type"]
@@ -72,7 +72,6 @@ class RecurringPaymentEventCreator:
                 .scan_csv()
                 .collect()
             )  # fmt: off
-
         __event_type = self.__determine_event_type(
             df=df,
             name=name,
@@ -80,6 +79,8 @@ class RecurringPaymentEventCreator:
 
         events_uuid = str(uuid4())
         recurring_payment_uuid = str(uuid4())
+
+        # init events record
         events_record = EventsTableRecord(
             uuid=events_uuid,
             fk__recurring_payments=recurring_payment_uuid,
@@ -111,20 +112,23 @@ class RecurringPaymentEventCreator:
         # so they can perform more exhaustive schema validation.
 
         existing_events_table = self.get_datasource().events_table
-        with existing_events_table.path.open("a") as events_tf:
+        with existing_events_table.path.open("a") as events_f:
             (
                 events_record
                 .to_df()
-                .write_csv(events_tf, include_header=False)
+                .write_csv(events_f, include_header=False)
             )  # fmt: off
 
         # append to recurring table
         existing_recurring_payment_event = (
-            self.get_datasource().recurring_payments_table
-        )
-        with existing_recurring_payment_event.path.open("a") as recurring_tf:
+            self
+            .get_datasource()
+            .recurring_payments_table
+        )  # fmt: off
+
+        with existing_recurring_payment_event.path.open("a") as recurring_f:
             (
                 recurring_record
                 .to_df()
-                .write_csv(recurring_tf, include_header=False)
+                .write_csv(recurring_f, include_header=False)
             )  # fmt: off
