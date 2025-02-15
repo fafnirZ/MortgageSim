@@ -6,9 +6,10 @@ class EventsTableSchema(SchemaTemplate):
     @classmethod
     def get_polars_schema(self) -> dict[str, pl.DataType]:
         return {
-            "id": pl.String(),
+            "uuid": pl.String(),
             "fk__recurring_payments": pl.String(),
             "fk__single_payments": pl.String(),
+            "fk__loan_parameters": pl.String(),
             # metadata
             "event_registered_timestamp": pl.Datetime(),
         }

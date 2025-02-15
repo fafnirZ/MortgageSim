@@ -54,3 +54,11 @@ class RecurringPaymentsTableSignature(SignatureTemplate):
 
     def get_regex_signature():
         return r"recurring_payments\.parquet"
+
+
+class SinglePaymentsTableSignature(SignatureTemplate):
+    def get_signature():
+        return "single_payments.parquet"
+
+    def get_regex_signature():
+        return r"single_payments\.parquet"

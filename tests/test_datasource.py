@@ -9,6 +9,8 @@ def test_datasource_creation(tmp_path):
 
     assert ds.path.exists()
     assert ds.events_table.path.exists()
+    assert ds.recurring_payments_table.path.exists()
+    assert ds.single_payments_table.path.exists()
 
 
 def test_datasource_instantiation(tmp_path):

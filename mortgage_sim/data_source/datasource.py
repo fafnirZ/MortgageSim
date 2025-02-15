@@ -5,6 +5,11 @@ from typing import ClassVar
 
 from mortgage_sim.data_source.signatures import DataSourceSignature
 from mortgage_sim.data_source.tables.events.table import EventsTable
+from mortgage_sim.data_source.tables.recurring_payments.table import (
+    RecurringPaymentsTable,
+)
+from mortgage_sim.data_source.tables.single_payment.table import SinglePaymentsTable
+from mortgage_sim.data_source.tables.templates.table import TableTemplate
 from mortgage_sim.utils.asserts import assert_type
 
 
@@ -35,8 +40,19 @@ class DataSource:
         # create datasource
         path.mkdir()
 
-        # create events table
-        EventsTable.create(path=path / EventsTable.signature.get_signature())
+        # create all tables
+        all_tables = [
+            EventsTable,
+            RecurringPaymentsTable,
+            SinglePaymentsTable,
+        ]
+
+        for table_class in all_tables:
+            # create events table
+            _table_class: type[TableTemplate] = table_class
+            _table_class.create(
+                path=path / _table_class.get_signature().get_signature()
+            )
 
     @classmethod
     def from_path(cls, *, path: Path):
@@ -57,4 +73,16 @@ class DataSource:
 
     @property
     def events_table(self):
-        return EventsTable(path=self.path / EventsTable.signature.get_signature())
+        return EventsTable(path=self.path / EventsTable.get_signature().get_signature())
+
+    @property
+    def recurring_payments_table(self):
+        return RecurringPaymentsTable(
+            path=self.path / RecurringPaymentsTable.get_signature().get_signature()
+        )
+
+    @property
+    def single_payments_table(self):
+        return SinglePaymentsTable(
+            path=self.path / SinglePaymentsTable.get_signature().get_signature()
+        )
