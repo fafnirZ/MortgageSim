@@ -29,19 +29,28 @@ class RecordTemplate(ABC):
                 f"Got: {kwargs.keys()}\n"
             )
 
-        #
-        # asserts types are according to schema
-        #
-        for expected_attrs, expected_py_type in (
-            self.get_schema().get_python_schema().items()
-        ):
-            assert_type(expected_attrs, expected_py_type)
-
         # dynamically setting values
         # based on kwargs which has been
         # validated against schema.
         for attr, attr_val in kwargs.items():
             setattr(self, attr, attr_val)
+
+        #
+        # asserts types are according to schema
+        #
+        for expected_attr, expected_py_type in (
+            self.get_schema().get_python_schema().items()
+        ):
+            attr_val = getattr(self, expected_attr)
+            assert_type(attr_val, expected_py_type)
+
+    def to_df(self) -> pl.DataFrame:
+        _d = {
+            col_name: getattr(self, col_name)
+            for col_name in self.get_schema().get_python_schema().keys()
+        }
+
+        return pl.DataFrame(_d, schema=self.get_schema().get_polars_schema())
 
     # def to_csv(self, append_newline: bool = True) -> str:
     #     _str = ""
@@ -51,11 +60,3 @@ class RecordTemplate(ABC):
     #     if append_newline:
     #         _str += "\n"
     #     return _str
-
-    def to_df(self) -> pl.DataFrame:
-        _d = {
-            col_name: getattr(self, col_name)
-            for col_name in self.get_schema().get_python_schema().keys()
-        }
-
-        return pl.DataFrame(_d, schema=self.get_schema().get_polars_schema())

@@ -78,8 +78,8 @@ class RecurringPaymentEventCreator:
             name=name,
         )
 
-        events_uuid = uuid4()
-        recurring_payment_uuid = uuid4()
+        events_uuid = str(uuid4())
+        recurring_payment_uuid = str(uuid4())
         events_record = EventsTableRecord(
             uuid=events_uuid,
             fk__recurring_payments=recurring_payment_uuid,
