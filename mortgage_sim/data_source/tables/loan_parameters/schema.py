@@ -13,8 +13,8 @@ class LoanParametersTableSchema(SchemaTemplate):
             "parameters_change_start_date": pl.Date(),
             # these params below should never change.
             "principle_amount": pl.Float32(),
-            "monthly_repayment_date": pl.Date(),
-            "monthly_interest_charge_date": pl.Date(),
+            "monthly_repayment_start_date": pl.Date(),
+            "monthly_interest_charge_start_date": pl.Date(),
             "loan_start_date": pl.Date(),
         }
 
@@ -27,7 +27,7 @@ class LoanParametersTableSchema(SchemaTemplate):
             "parameters_change_start_date": date,
             # these params below should never change.
             "principle_amount": float,
-            "monthly_repayment_date": date,  # NOTE this should never change
-            "monthly_interest_charge_date": date,  # NOTE this should never change
+            "monthly_repayment_start_date": date,  # NOTE this should never change
+            "monthly_interest_charge_start_date": date,  # NOTE this should never change
             "loan_start_date": date,  # NOTE this should never change
         }
