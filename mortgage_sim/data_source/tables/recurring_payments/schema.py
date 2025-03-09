@@ -21,6 +21,7 @@ class RecurringPaymentsTableSchema(SchemaTemplate):
     def get_polars_schema(self) -> dict[str, pl.DataType]:
         return {
             "uuid": pl.String(),
+            "account_id": pl.String(),  
             "name": pl.String(),  # canonical id attached to a recurring event.
             "date": pl.Date(),
             "type": pl.Enum(["RECURRING_START", "RECURRING_END"]),
@@ -39,6 +40,7 @@ class RecurringPaymentsTableSchema(SchemaTemplate):
     def get_python_schema(self) -> dict[str, pl.DataType]:
         return {
             "uuid": str,
+            "account_id": str, # the account to apply this to.
             "name": str,  # canonical id attached to a recurring event.
             "date": date,
             "type": RecurringPaymentsType,
