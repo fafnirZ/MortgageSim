@@ -49,6 +49,9 @@ class Simulator(SimulatorUtils):
                  perform single payment on accounts
         """
         for period in self.get_next_period():
+            # exit condition
+            if self.loan_account.balance <= 0:
+                break
             period_start = period[0]
             period_end = period[1]
 
