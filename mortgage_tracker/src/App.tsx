@@ -2,7 +2,7 @@ import { Routes } from 'react-router'
 import './App.css'
 import { BrowserRouter } from 'react-router'
 import { Route } from 'react-router'
-import { HomePage } from './pages/Homepage'
+import { AppPage } from './pages/AppPage'
 
 function App() {
 
@@ -10,7 +10,7 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-         <Route path="/" element={<HomePage/>}/> 
+         <Route path="/" element={<AppPage/>}/> 
         </Routes>
       </BrowserRouter>
     </>
