@@ -15,42 +15,8 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 find_package(Qt6 COMPONENTS Core Widgets Gui REQUIRED)
 
-# --- Source Files and Executable ---
-
-set(SOURCE_FILES
-    main.cpp
-    mainwindow.cpp
-)
-
-set(HEADER_FILES
-    mainwindow.hpp
-)
-
-# Define the list of Qt resource files (optional)
-# set(RESOURCE_FILES
-#    resources.qrc
-# )
-
-# Define the list of Qt UI form files (optional)
-# set(UI_FILES
-#    mainwindow.ui
-# )
-
-# Use Qt's macro to handle the build steps for UI and resources (if you have them)
-# if(UI_FILES)
-#     qt_add_executable(pni_pilot
-#         ${SOURCE_FILES}
-#         ${HEADER_FILES}
-#         ${UI_FILES}
-#         ${RESOURCE_FILES}
-#     )
-# else()
-    # Basic executable if no UI or resources are used
-    qt_add_executable(pni_pilot
-        ${SOURCE_FILES}
-        ${HEADER_FILES}
-    )
-# endif()
+add_subdirectory(src)
+qt_add_executable(pni_pilot src/main.cpp)
 
 
 # --- Linking and Target Configuration ---
