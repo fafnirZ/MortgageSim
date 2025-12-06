@@ -1,8 +1,8 @@
 install:
 	VCPKG_MAX_CONCURRENTY=3 && vcpkg install
 prebuild:
-	cmake -S . -B build
+	./prebuild.sh
 build:
-	cmake --build build
+	ninja
 start:
 	./build/
