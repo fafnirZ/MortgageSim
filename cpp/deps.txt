@@ -1,0 +1,7 @@
+build-essential
+pkg-config
+bison
+flex
+cmake
+ninja-build
+autoconf
