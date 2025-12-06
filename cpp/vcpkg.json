@@ -2,6 +2,15 @@
   "name": "pni-pilot",
   "version": "1.0.0",
   "dependencies": [
-    "qtbase"
+    "libpq",
+    {
+      "name": "qtbase",
+      "default-features": false,
+      "features": [
+        "core",
+        "gui",
+        "widgets"
+      ]
+    }
   ]
 }
