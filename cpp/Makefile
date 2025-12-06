@@ -2,7 +2,7 @@ install:
 	VCPKG_MAX_CONCURRENTY=4 && vcpkg install
 prebuild:
 	./prebuild.sh
-build:
-	ninja
+compile:
+	cd build && ninja
 start:
 	./build/
