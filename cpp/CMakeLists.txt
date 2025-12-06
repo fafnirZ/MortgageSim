@@ -6,7 +6,6 @@ project(pni_pilot VERSION 1.0.0 LANGUAGES CXX)
 
 
 # --- C++ Standard Setting ---
-
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(CMAKE_CXX_EXTENSIONS OFF) 
@@ -14,7 +13,6 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 # --- Qt Setup ---
 
 find_package(Qt6 COMPONENTS Core Widgets Gui REQUIRED)
-
 add_subdirectory(src)
 qt_add_executable(pni_pilot src/main.cpp)
 
@@ -27,7 +25,10 @@ target_link_libraries(pni_pilot
         Qt6::Core
         Qt6::Gui
         Qt6::Widgets
+        # my own libraries
+        pni_pilot_core
 )
+
 
 
 # Apply standard Qt property settings (needed for things like moc, rcc, and uic)
