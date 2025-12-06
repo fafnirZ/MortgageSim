@@ -13,7 +13,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 # --- Qt Setup ---
 
-find_package(Qt6 COMPONENTS Core Widgets REQUIRED)
+find_package(Qt6 COMPONENTS Core Widgets Gui REQUIRED)
 
 # --- Source Files and Executable ---
 
@@ -59,6 +59,7 @@ set(HEADER_FILES
 target_link_libraries(pni_pilot
     PRIVATE
         Qt6::Core
+        Qt6::Gui
         Qt6::Widgets
 )
 
