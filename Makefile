@@ -1,3 +1,5 @@
+run:
+	uv run streamlit run ./mortgage_sim/simulation/streamlit.py
 venv:
 	uv venv
 
